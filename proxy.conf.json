@@ -1,0 +1,8 @@
+{
+    "/api": {
+      "target": "https://musicbrainz.org",
+      "secure": false,
+      "changeOrigin": true
+    }
+  }
+  

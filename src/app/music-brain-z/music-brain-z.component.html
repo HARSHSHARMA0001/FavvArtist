@@ -1,0 +1,76 @@
+<h1 class="display-3">Search MusicBrainZ</h1>
+<hr>
+    <form class="form-inline">
+        <div class="row">
+          <div class="col-sm-8">
+            <input class="form-control " type="search" placeholder="Search" 
+            aria-label="Search" [(ngModel)]="query" name="searchInput" >
+        </div>
+        <div class="col-sm-4">
+          <button class="btn btn-dark" type="submit" (click)="search()">Search</button>
+        </div> 
+      </div>
+      
+    </form>
+
+   
+
+
+
+<div>
+    <h1 class="display-2">Search Results:</h1>
+    <div>
+    <table class="table" >
+      <thead>
+        <tr>
+          <th scope="col">Artist Name</th>
+          <th scope="col"></th>
+
+        </tr>
+      </thead>
+      <tbody *ngFor="let artist of getDistinctArtistNames()">
+        <tr>
+            <td scope="row"> {{ artist }}</td>
+            <td>
+            <button (click)="toggleTable(artist)">
+              {{ showTables[artist] ? 'Hide Releases' : 'Show Releases' }}
+            </button>
+          </td>
+        </tr>
+        <tr *ngIf="showTables[artist]">
+          <td colspan="4">
+            <table  class="table">
+              <thead>
+                <tr>
+                  <th scope="col"> </th>
+                  <th scope="col">Year</th>
+                  <th scope="col">Title</th>
+                  <th scope="col">Release Label</th>
+                  <th scope="col">Number of Tracks</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let release of releasesDetails[artist]">
+                  <td scope="col">
+                    <input class="form-check-input" type="checkbox" [(ngModel)]="release.selected" 
+                    id="checkboxNoLabel" value="{{artist}}" aria-label="..."
+                    (change)="addToSelectedReleases(artist, release)" (click)="ShowAddToFav()">
+                    <!-- <div *ngIf="favourite">
+                      <app-favourite [addToSelectedReleases]="selectedReleases"></app-favourite></div>   -->
+                  </td>
+                  <td scope="col">{{ release.year }}</td>
+                  <td scope="col">{{ release.title }}</td>
+                  <td scope="col">{{ release.releaseLabel }}</td>
+                  <td scope="col">{{ release.numberOfTracks }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+  </tbody>
+</table>
+</div>
+</div>
+
+        
+    

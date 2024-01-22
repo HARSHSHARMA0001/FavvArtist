@@ -1,0 +1,51 @@
+<div *ngIf="distinctArtists.length > 0 ">
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">Artist Name</th>
+        <th scope="col"></th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody *ngFor="let artist of distinctArtists">
+      <tr>
+        <td scope="row"><mat-slide-toggle (change)="removeArtistReleases(artist)"></mat-slide-toggle>
+        </td>
+          <td scope="row"> {{ artist }}</td>
+          <td>
+          <button (click)="toggleTable(artist)">
+            {{ showTables[artist] ? 'Hide Releases' : 'Show Releases' }}
+          </button>
+        </td>
+      </tr>
+      <tr *ngIf="showTables[artist]">
+        <td colspan="4">
+          <table  class="table">
+            <thead>
+              <tr>
+                <th scope="col"> </th>
+                <th scope="col">Year</th>
+                <th scope="col">Title</th>
+                <th scope="col">Release Label</th>
+                <th scope="col">Number of Tracks</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let release of releasesDetails[artist]">
+                
+                <td scope="col"></td>
+                <td scope="col">{{ release.year }}</td>
+                <td scope="col">{{ release.title }}</td>
+                <td scope="col">{{ release.releaseLabel }}</td>
+                <td scope="col">{{ release.numberOfTracks }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+</tbody>
+</table>
+</div>
+
+  <p *ngIf="distinctArtists.length<=0">No data in fav.</p>
+
